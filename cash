@@ -1,0 +1,52 @@
+#include <cs50.h>
+#include <stdio.h>
+
+int calculate_coins(int cents, int current_coins, int coin_value);
+
+int main(void)
+{
+    // Prompt for amount of change owed
+    int cents;
+    int coins = 0;
+    do
+    {
+        cents = get_int("Change owed: ");
+    }
+    while (cents < 0);
+
+    // Calculate number of quarters
+    int quarters = calculate_coins(cents, coins, 25);
+
+    // Subtract value from cents
+    cents = cents - quarters * 25;
+
+    // Calculate total number of coins
+    coins = coins + quarters;
+
+    // Calculate number of dimes
+    int dimes = calculate_coins(cents, quarters, 10);
+    cents = cents - dimes * 10;
+    coins = coins + dimes;
+
+    // Calculate number of nickels
+    int nickels = calculate_coins(cents, dimes, 5);
+    cents = cents - nickels * 5;
+    coins = coins + nickels;
+
+    // Calculate number of pennies
+    int pennies = calculate_coins(cents, nickels, 1);
+    cents = cents - pennies;
+    coins = coins + pennies;
+
+    printf("%i coins\n", coins);
+}
+
+int calculate_coins(int cents, int current_coins, int coin_value)
+{
+    while (cents >= coin_value)
+        {
+            current_coins++;
+            cents = cents - coin_value;
+        }
+    return current_coins;
+}
