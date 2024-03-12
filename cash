@@ -12,12 +12,13 @@ int main(void)
 {
     // Prompt for amount of change owed
     int cents;
-    int coins = 0;
     do
     {
         cents = get_int("Change owed: ");
     }
     while (cents < 0);
+
+    int coins = 0;
 
     // Calculate number of quarters
     int quarters = calculate_coins(cents, coins, 25);
@@ -49,9 +50,9 @@ int main(void)
 int calculate_coins(int cents, int current_coins, int coin_value)
 {
     while (cents >= coin_value)
-        {
-            current_coins++;
-            cents = cents - coin_value;
-        }
+    {
+        current_coins++;
+        cents = cents - coin_value;
+    }
     return current_coins;
 }
